@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BWYouCore", "BWYouCore\BWYouCore.csproj", "{7BFD2A5B-882C-49FB-962F-58C377734AC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BWYouCore", "BWYouCore\BWYouCore.csproj", "{7BFD2A5B-882C-49FB-962F-58C377734AC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BWYouCore.Web.MVC", "BWYouCore.Web.MVC\BWYouCore.Web.MVC.csproj", "{023E31C9-5C02-447F-A6F3-E8E8EB0C45A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BWYouCore.Web.MVC", "BWYouCore.Web.MVC\BWYouCore.Web.MVC.csproj", "{023E31C9-5C02-447F-A6F3-E8E8EB0C45A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BWYouCore.Web.M", "BWYouCore.Web.M\BWYouCore.Web.M.csproj", "{C0BB906D-980C-4354-B514-094CEC1F98CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BWYouCore.Web.M", "BWYouCore.Web.M\BWYouCore.Web.M.csproj", "{C0BB906D-980C-4354-B514-094CEC1F98CA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BWYouCore.Cloud", "BWYouCore.Cloud\BWYouCore.Cloud.csproj", "{0531EFD1-DB39-46FC-A123-B164E96968F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BWYouCore.Crypt", "BWYouCore.Crypt\BWYouCore.Crypt.csproj", "{5B9C4CE9-20CA-4825-BDE5-A46F61A1A6E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{C0BB906D-980C-4354-B514-094CEC1F98CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0BB906D-980C-4354-B514-094CEC1F98CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0BB906D-980C-4354-B514-094CEC1F98CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0531EFD1-DB39-46FC-A123-B164E96968F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0531EFD1-DB39-46FC-A123-B164E96968F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0531EFD1-DB39-46FC-A123-B164E96968F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0531EFD1-DB39-46FC-A123-B164E96968F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B9C4CE9-20CA-4825-BDE5-A46F61A1A6E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B9C4CE9-20CA-4825-BDE5-A46F61A1A6E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B9C4CE9-20CA-4825-BDE5-A46F61A1A6E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B9C4CE9-20CA-4825-BDE5-A46F61A1A6E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
