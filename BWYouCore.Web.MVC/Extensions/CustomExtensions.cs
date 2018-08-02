@@ -12,6 +12,7 @@ using BWYouCore.Web.MVC.ViewModels;
 using BWYouCore.Web.MVC.BindingModels;
 using BWYouCore.Web.MVC.Etc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Threading.Tasks;
 
 namespace BWYouCore.Web.MVC.Extensions
 {
@@ -376,6 +377,31 @@ namespace BWYouCore.Web.MVC.Extensions
                 toCheck = toCheck.BaseType;
             }
             return false;
+        }
+
+        public static async Task ConvertVMAsync<TEntity, TVM>(this TEntity baseModel, TVM vm, string sort = "Id", int depth = 0)
+        where TEntity : IDbModel
+        where TVM : IModelLoader<TEntity>, new()
+        {
+            vm = new TVM();
+            await vm.LoadModelAsync(baseModel, 0, depth, sort);
+        }
+
+        public static Task ConvertVMAsync<TEntity, TVM>(this IEnumerable<TEntity> baseModels, List<TVM> vms, string sort = "Id", int depth = 0)
+        where TEntity : IDbModel
+        where TVM : IModelLoader<TEntity>, new()
+        {
+            return Task.Run(async () =>
+            {
+                vms = new List<TVM>();
+                foreach (var baseModel in baseModels)
+                {
+                    TVM model = new TVM();
+                    await model.LoadModelAsync(baseModel, 0, depth, sort);
+                    vms.Add(model);
+                }
+                return vms;
+            });
         }
     }
 }
