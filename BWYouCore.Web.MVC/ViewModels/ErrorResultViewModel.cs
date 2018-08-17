@@ -30,7 +30,6 @@ namespace BWYouCore.Web.MVC.ViewModels
             Etc = etc;
         }
 
-        //TODO ExceptionHandlerContext 어떻게 바뀐걸까.
         public ErrorResultViewModel(int httpStatusCode, Exception ex, dynamic etc = null)
         {
             Error = new WebStatusMessageBody()

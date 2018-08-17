@@ -24,7 +24,7 @@ namespace BWYouCore.Web.MVC.Services
     public class IdEntityService<TEntity, TId> : IEntityService<TEntity, TId>
         where TEntity : IdModel<TId>
     {
-        //TODO 각 라이브러의 테스트 코드 필요.
+        //TODO 각 라이브러리의 테스트 코드 필요.
         /// <summary>
         /// IUnitOfWork
         /// </summary>
