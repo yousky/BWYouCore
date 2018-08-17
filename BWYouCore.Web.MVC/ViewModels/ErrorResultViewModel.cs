@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -29,23 +30,22 @@ namespace BWYouCore.Web.MVC.ViewModels
             Etc = etc;
         }
 
-        //TODO ExceptionHandlerContext 어떻게 바뀐걸까.
-        //        public ErrorResultViewModel(HttpStatusCode httpStatusCode, ExceptionHandlerContext context, dynamic etc = null)
-        //        {
-        //            Error = new WebStatusMessageBody()
-        //            {
-        //                Status = (int)httpStatusCode,
-        //                Code = "E500",
-        //                Message = context.Exception.Message,
-        //                Link = "",
-        //#if(!DEBUG)
-        //                DeveloperMessage = ""
-        //#else
-        //                DeveloperMessage = context.Exception.ToString()
-        //#endif
-        //            };
-        //            Etc = etc;
-        //        }
+        public ErrorResultViewModel(int httpStatusCode, Exception ex, dynamic etc = null)
+        {
+            Error = new WebStatusMessageBody()
+            {
+                Status = httpStatusCode,
+                Code = "E" + string.Format("{0:D3}", httpStatusCode),
+                Message = ex.Message,
+                Link = "",
+#if (!DEBUG)
+                        DeveloperMessage = ""
+#else
+                DeveloperMessage = ex.ToString()
+#endif
+            };
+            Etc = etc;
+        }
 
         public ErrorResultViewModel(int httpStatusCode, ModelStateDictionary modelState, dynamic etc = null)
         {
