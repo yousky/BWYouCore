@@ -8,6 +8,6 @@ namespace BWYouCore.Web.MVC.BindingModels
     public interface IBindingModel<TEntity>
         where TEntity : IDbModel
     {
-        TEntity CreateBaseModel();
+        TEntity CreateBaseModel(TEntity src);
     }
 }
