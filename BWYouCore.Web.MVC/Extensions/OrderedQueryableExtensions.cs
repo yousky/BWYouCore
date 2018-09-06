@@ -59,11 +59,17 @@ namespace BWYouCore.Web.MVC.Extensions
         }
 
 
-        public static IOrderedQueryable<T> SortBy<T>(this IOrderedQueryable<T> query, string sortInfos)
+        public static IOrderedQueryable<T> SortBy<T>(this IQueryable<T> query, string sortInfos)
         {
+            IOrderedQueryable<T> orderedQuery = null;
+            bool firstPass = true;
+            if (typeof(IOrderedQueryable<T>).IsAssignableFrom(query.GetType()))
+            {
+                orderedQuery = ((IOrderedQueryable<T>)query);
+            }
+
             string[] sortInfoArray = sortInfos.Split(',');
 
-            var firstPass = true;
             foreach (var sortInfo in sortInfoArray)
             {
                 string sortProp = sortInfo;
@@ -77,20 +83,16 @@ namespace BWYouCore.Web.MVC.Extensions
                 if (firstPass)
                 {
                     firstPass = false;
-                    query = bDesc == false ? query.OrderBy(sortProp) : query.OrderByDescending(sortProp);
+                    orderedQuery = bDesc == false ? query.OrderBy(sortProp) : query.OrderByDescending(sortProp);
                 }
                 else
                 {
-                    query = bDesc == false ? query.ThenBy(sortProp) : query.ThenByDescending(sortProp);
+                    orderedQuery = bDesc == false ? orderedQuery.ThenBy(sortProp) : orderedQuery.ThenByDescending(sortProp);
                 }
             }
 
-            return query;
+            return orderedQuery;
         }
 
-        public static IOrderedQueryable<T> SortBy<T>(this IQueryable<T> query, string sortInfos)
-        {
-            return ((IOrderedQueryable<T>)query).SortBy(sortInfos);
-        }
     }
 }
