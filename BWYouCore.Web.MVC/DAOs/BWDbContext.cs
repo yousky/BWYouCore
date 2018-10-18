@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace BWYouCore.Web.MVC.DAOs
 {
-    public class BWIdentityDbContext<TUser> : IdentityDbContext<TUser> where TUser : IdentityUser
+    public class BWDbContext : DbContext
     {
-        public ILog logger = LogManager.GetLogger(typeof(BWIdentityDbContext<TUser>));
+        public ILog logger = LogManager.GetLogger(typeof(BWDbContext));
 
-        public BWIdentityDbContext(DbContextOptions options)
+        public BWDbContext(DbContextOptions options)
             : base(options)
         {
         }
@@ -42,7 +42,7 @@ namespace BWYouCore.Web.MVC.DAOs
             return base.SaveChangesAsync(cancellationToken);
         }
 
-        protected void ChangeDefaultValue()
+        protected virtual void ChangeDefaultValue()
         {
             int cntAdded = 0;
             int cntDeleted = 0;
