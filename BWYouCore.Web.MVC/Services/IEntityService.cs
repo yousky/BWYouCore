@@ -155,12 +155,30 @@ namespace BWYouCore.Web.MVC.Services
         /// <returns></returns>
         Task<IEnumerable<TEntity>> ValidAndCreateAsync(IEnumerable<TEntity> entities, ModelStateDictionary ModelState);
         /// <summary>
+        /// Create entity
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        Task<TEntity> CreateAsync(TEntity model);
+        /// <summary>
+        /// Create entities
+        /// </summary>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        Task<IEnumerable<TEntity>> CreateAsync(IEnumerable<TEntity> models);
+        /// <summary>
         /// Update entity after validation
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="ModelState"></param>
         /// <returns></returns>
         Task<TEntity> ValidAndUpdateAsync(TEntity entity, ModelStateDictionary ModelState);
+        /// <summary>
+        /// Update entity
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        Task<TEntity> UpdateAsync(TEntity model);
         /// <summary>
         /// Delete entity after validation
         /// </summary>
@@ -176,13 +194,30 @@ namespace BWYouCore.Web.MVC.Services
         /// <returns></returns>
         Task<IEnumerable<TId>> ValidAndDeleteAsync(IEnumerable<TId> models, ModelStateDictionary ModelState);
         /// <summary>
+        /// Delete entity
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        Task<TEntity> DeleteAsync(TEntity model);
+        /// <summary>
+        /// Delete entities
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        Task<IEnumerable<TId>> DeleteAsync(IEnumerable<TId> ids);
+        /// <summary>
         /// Clone entity after validation
         /// </summary>
         /// <param name="id"></param>
         /// <param name="ModelState"></param>
         /// <returns></returns>
         Task<TEntity> ValidAndCloneAsync(TId id, ModelStateDictionary ModelState);
-
+        /// <summary>
+        /// Clone entity
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        Task<TEntity> CloneAsync(TEntity model);
 
 
     }

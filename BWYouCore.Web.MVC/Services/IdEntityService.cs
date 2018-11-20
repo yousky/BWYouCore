@@ -280,7 +280,7 @@ namespace BWYouCore.Web.MVC.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        protected virtual async Task<TEntity> CreateAsync(TEntity model)
+        public virtual async Task<TEntity> CreateAsync(TEntity model)
         {
             this._repo.Create(model);
             await this._unitOfWork.SaveChangesAsync();
@@ -291,7 +291,7 @@ namespace BWYouCore.Web.MVC.Services
         /// </summary>
         /// <param name="models"></param>
         /// <returns></returns>
-        protected virtual async Task<IEnumerable<TEntity>> CreateAsync(IEnumerable<TEntity> models)
+        public virtual async Task<IEnumerable<TEntity>> CreateAsync(IEnumerable<TEntity> models)
         {
             this._repo.Create(models);
             await this._unitOfWork.SaveChangesAsync();
@@ -312,7 +312,7 @@ namespace BWYouCore.Web.MVC.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        protected virtual async Task<TEntity> UpdateAsync(TEntity model)
+        public virtual async Task<TEntity> UpdateAsync(TEntity model)
         {
             this._repo.Update(model, GetUpdatablePropertiesNameArray(model));
             await this._unitOfWork.SaveChangesAsync();
@@ -351,13 +351,13 @@ namespace BWYouCore.Web.MVC.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        protected virtual async Task<TEntity> DeleteAsync(TEntity model)
+        public virtual async Task<TEntity> DeleteAsync(TEntity model)
         {
             this._repo.Remove(model);
             await this._unitOfWork.SaveChangesAsync();
             return model;
         }
-        protected virtual async Task<IEnumerable<TId>> DeleteAsync(IEnumerable<TId> ids)
+        public virtual async Task<IEnumerable<TId>> DeleteAsync(IEnumerable<TId> ids)
         {
             this._repo.DbSet.RemoveRange(this._repo.DbSet.Where(x => ids.Contains(x.Id)));
             //this._repo.Remove(models);
@@ -385,7 +385,7 @@ namespace BWYouCore.Web.MVC.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        protected virtual async Task<TEntity> CloneAsync(TEntity model)
+        public virtual async Task<TEntity> CloneAsync(TEntity model)
         {
             var clone = this._repo.Clone(model);
             await this._unitOfWork.SaveChangesAsync();
