@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BWYouCore.Web.M.Models
 {
-    public class ConcurrencyModel : BWLongModel, IConcurrencyModel
+    public class ConcurrencyLongModel : BWLongModel, IConcurrencyModel
     {
         [Timestamp]
         public virtual byte[] RowVersion { get; set; }
