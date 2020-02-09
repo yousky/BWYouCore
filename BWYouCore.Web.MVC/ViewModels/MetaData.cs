@@ -9,7 +9,7 @@ namespace BWYouCore.Web.MVC.ViewModels
     {
         #region PageInfo
 
-        public int TotalItemCount { get; set; }
+        public long TotalItemCount { get; set; }
         public int TotalPageCount { get; set; }
         public int PageIndex { get; set; }
         public int PageSize { get; set; }
@@ -34,6 +34,18 @@ namespace BWYouCore.Web.MVC.ViewModels
             this.HasPreviousPage = pagedList.HasPreviousPage;
             this.IsFirstPage = pagedList.IsFirstPage;
             this.IsLastPage = pagedList.IsLastPage;
+        }
+        public MetaData(int totalItemCount, int pageIndex, int pageSize)
+        {
+            this.TotalItemCount = totalItemCount;
+            this.PageIndex = pageIndex;
+            this.PageSize = pageSize;
+
+            this.TotalPageCount = TotalItemCount > 0 ? (int)Math.Ceiling(TotalItemCount / (double)PageSize) : 0;
+            this.HasNextPage = PageIndex < TotalPageCount;
+            this.HasPreviousPage = PageIndex > 1;
+            this.IsFirstPage = PageIndex == 1;
+            this.IsLastPage = PageIndex >= TotalPageCount;
         }
 
     }

@@ -3,6 +3,7 @@ using BWYouCore.Web.M.Models;
 using BWYouCore.Web.MVC.DAOs;
 using BWYouCore.Web.MVC.Etc;
 using BWYouCore.Web.MVC.Extensions;
+using BWYouCore.Web.MVC.ViewModels;
 using LinqKit;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
@@ -95,7 +96,7 @@ namespace BWYouCore.Web.MVC.Services
         /// <param name="before"></param>
         /// <param name="limit"></param>
         /// <returns></returns>
-        public virtual Task<IEnumerable<TEntity>> GetFilteredListAsync(TEntity model, string sort, string limitBaseColName, TId after, TId before, int limit)
+        public virtual Task<CursorResultViewModel<TEntity>> GetFilteredListAsync(TEntity model, string sort, string limitBaseColName, TId after, TId before, int limit)
         {
             var predicate = model.GetWhereClause();
             return GetFilteredListAsync(predicate, sort, limitBaseColName, after, before, limit);
@@ -145,7 +146,7 @@ namespace BWYouCore.Web.MVC.Services
         /// <param name="before"></param>
         /// <param name="limit"></param>
         /// <returns></returns>
-        public virtual async Task<IEnumerable<TEntity>> GetFilteredListAsync(Expression<Func<TEntity, bool>> filter, string sort, string limitBaseColName, TId after, TId before, int limit)
+        public virtual async Task<CursorResultViewModel<TEntity>> GetFilteredListAsync(Expression<Func<TEntity, bool>> filter, string sort, string limitBaseColName, TId after, TId before, int limit)
         {
             List<ExpressionFilter> filters = new List<ExpressionFilter>();
             if (after != null)
@@ -163,7 +164,9 @@ namespace BWYouCore.Web.MVC.Services
                 var expr = ExpressionBuilder.GetExpression<TEntity>(filters);
                 q = q.Where(expr);
             }
-            return await q.SortBy(sort).Take(limit).ToListAsync();
+            var crvm = await CursorResultViewModel<TEntity>.BuildAsync(q, sort, limit);
+
+            return crvm;
         }
         /// <summary>
         /// Expose query objects
