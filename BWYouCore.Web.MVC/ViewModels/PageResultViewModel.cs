@@ -59,7 +59,7 @@ namespace BWYouCore.Web.MVC.ViewModels
         /// <returns></returns>
         public IPagedList<T> ToPagedList()
         {
-            var p = new StaticPagedList<T>(this.Result, this.MetaData.PageIndex, this.MetaData.PageSize, this.MetaData.TotalItemCount);
+            var p = new StaticPagedList<T>(this.Result, this.MetaData.PageIndex, this.MetaData.PageSize, (int)this.MetaData.TotalItemCount);    //long 값 존재 시 문제 될 것임.
             return p;
         }
     }
