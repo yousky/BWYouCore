@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BWYouCore.Cloud", "BWYouCor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BWYouCore.Crypt", "BWYouCore.Crypt\BWYouCore.Crypt.csproj", "{5B9C4CE9-20CA-4825-BDE5-A46F61A1A6E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BWYouCore.Compress", "BWYouCore.Compress\BWYouCore.Compress.csproj", "{20023D30-AE92-4C14-9B7A-5C8D04AACEB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BWYouCore.Compress", "BWYouCore.Compress\BWYouCore.Compress.csproj", "{20023D30-AE92-4C14-9B7A-5C8D04AACEB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BWYouCore.Cloud.Test", "BWYouCore.Cloud.Test\BWYouCore.Cloud.Test.csproj", "{2721FA4D-4249-4C18-8420-0791635F7F66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{20023D30-AE92-4C14-9B7A-5C8D04AACEB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20023D30-AE92-4C14-9B7A-5C8D04AACEB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20023D30-AE92-4C14-9B7A-5C8D04AACEB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2721FA4D-4249-4C18-8420-0791635F7F66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2721FA4D-4249-4C18-8420-0791635F7F66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2721FA4D-4249-4C18-8420-0791635F7F66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2721FA4D-4249-4C18-8420-0791635F7F66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

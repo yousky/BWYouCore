@@ -1,4 +1,5 @@
 ﻿using BWYouCore.Cloud.Exceptions;
+using HeyRed.Mime;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
@@ -67,8 +68,13 @@ namespace BWYouCore.Cloud.Storage
                 await blockBlob.UploadFromStreamAsync(fileStream);
             }
 
+            string mimeType = MimeTypesMap.GetMimeType(sourcefilename);
+            blockBlob.Properties.ContentType = mimeType;
+            await blockBlob.SetPropertiesAsync();
+
             return blockBlob.StorageUri.PrimaryUri.AbsoluteUri;
         }
+
         /// <summary>
         /// 원본 파일을 스토리지에 업로드
         /// </summary>
@@ -79,13 +85,23 @@ namespace BWYouCore.Cloud.Storage
         /// <param name="overwrite"></param>
         /// <param name="useSequencedName"></param>
         /// <returns></returns>
-        public Task<string> UploadAsync(string sourcefilepathname, string containerName, string destpath = "", bool useUUIDName = true, bool overwrite = false, bool useSequencedName = true)
+        public async Task<string> UploadAsync(string sourcefilepathname, string containerName, string destpath = "", bool useUUIDName = true, bool overwrite = false, bool useSequencedName = true)
         {
             FileInfo fileInfo = new FileInfo(sourcefilepathname);
 
-            using (var fileStream = fileInfo.OpenRead())
+            FileStream fileStream = null;
+            try
             {
-                return UploadAsync(fileStream, fileInfo.Name, containerName, destpath, useUUIDName, overwrite, useSequencedName);
+                fileStream = fileInfo.OpenRead();
+                var uri = await UploadAsync(fileStream, fileInfo.Name, containerName, destpath, useUUIDName, overwrite, useSequencedName);
+                return uri;
+            }
+            finally
+            {
+                if (fileStream != null)
+                {
+                    fileStream.Close();
+                }
             }
         }
 
