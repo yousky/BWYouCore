@@ -108,7 +108,7 @@ namespace BWYouCore.Web.MVC.DAOs
         {
             if (this.DbContext.Entry(entity).State != EntityState.Detached)
             {
-                logger.Warn(string.Format("Manually Updating the Entity Managed(Skip)  : type={0}, id={1}", entity.GetType().FullName, entity.Id));
+                logger.Info(string.Format("Manually Updating the Entity Managed(Skip)  : type={0}, id={1}", entity.GetType().FullName, entity.Id));
                 return;
             }
 
@@ -128,7 +128,7 @@ namespace BWYouCore.Web.MVC.DAOs
         {
             if (this.DbContext.Entry(entity).State != EntityState.Detached)
             {
-                logger.Warn(string.Format("Manually Updating the Entity Managed(Skip) : type={0}, id={1}", entity.GetType().FullName, entity.Id));
+                logger.Info(string.Format("Manually Updating the Entity Managed(Skip) : type={0}, id={1}", entity.GetType().FullName, entity.Id));
                 return;
             }
 
@@ -152,7 +152,7 @@ namespace BWYouCore.Web.MVC.DAOs
         {
             if (this.DbContext.Entry(entity).State != EntityState.Detached)
             {
-                logger.Warn(string.Format("Manually Updating the Entity Managed(Skip) : type={0}, id={1}", entity.GetType().FullName, entity.Id));
+                logger.Info(string.Format("Manually Updating the Entity Managed(Skip) : type={0}, id={1}", entity.GetType().FullName, entity.Id));
                 return;
             }
 
