@@ -40,7 +40,7 @@ namespace BWYouCore.Web.MVC.Extensions
         {
             if (source == null)
             {
-                logger.Info(string.Format("Clone Source is null return default(T): type={0}",
+                logger.Debug(string.Format("Clone Source is null return default(T): type={0}",
                                                 typeof(TEntity).FullName));
                 return default(TEntity);
             }
@@ -52,7 +52,7 @@ namespace BWYouCore.Web.MVC.Extensions
             //부모자식 관계 일 때는 자식이 부모를 만들지 않고 원본을 그대로 돌려주도록 해야 함
             if (direction == CascadeRelationAttribute.CascadeDirection.Up || bClone == false)
             {
-                logger.Info(string.Format("Clone Source as it is : type={0}, id={1}",
+                logger.Debug(string.Format("Clone Source as it is : type={0}, id={1}",
                                                 source.GetType().FullName, source.ToString()));
                 seen.Add(source, source);
                 return source;
@@ -116,7 +116,7 @@ namespace BWYouCore.Web.MVC.Extensions
                                 }
                                 else
                                 {
-                                    logger.Info(string.Format("Clone Property ICollection<T> T not IKeyModel type={0}, ToString={1}",
+                                    logger.Debug(string.Format("Clone Property ICollection<T> T not IKeyModel type={0}, ToString={1}",
                                                                     item.GetType().FullName,
                                                                     item.GetType().ToString()));
                                 }
@@ -126,7 +126,7 @@ namespace BWYouCore.Web.MVC.Extensions
                     }
                     else
                     {
-                        logger.Info(string.Format("Clone Property not IKeyModel type={0}, ToString={1}",
+                        logger.Debug(string.Format("Clone Property not IKeyModel type={0}, ToString={1}",
                                                         prop.PropertyType.FullName,
                                                         prop.PropertyType.ToString()));
                     }
@@ -146,7 +146,7 @@ namespace BWYouCore.Web.MVC.Extensions
         {
             if (source == null)
             {
-                logger.Info(string.Format("ActivateRelation Source is null : type={0}",
+                logger.Debug(string.Format("ActivateRelation Source is null : type={0}",
                                                 typeof(T).FullName));
                 return;
             }
@@ -185,7 +185,7 @@ namespace BWYouCore.Web.MVC.Extensions
                                 }
                                 else
                                 {
-                                    logger.Info(string.Format("ActivateRelation Property ICollection<T> T not IDbModel type={0}, ToString={1}",
+                                    logger.Debug(string.Format("ActivateRelation Property ICollection<T> T not IDbModel type={0}, ToString={1}",
                                                                     item.GetType().FullName,
                                                                     item.GetType().ToString()));
                                 }
@@ -194,7 +194,7 @@ namespace BWYouCore.Web.MVC.Extensions
                     }
                     else
                     {
-                        logger.Info(string.Format("ActivateRelation Property not IDbModel type={0}, ToString={1}",
+                        logger.Debug(string.Format("ActivateRelation Property not IDbModel type={0}, ToString={1}",
                                                         prop.PropertyType.FullName,
                                                         prop.PropertyType.ToString()));
                     }
@@ -216,7 +216,7 @@ namespace BWYouCore.Web.MVC.Extensions
         {
             if (source == null)
             {
-                logger.Info(string.Format("MapFrom Source is null : type={0}",
+                logger.Debug(string.Format("MapFrom Source is null : type={0}",
                                                 typeof(TSource).FullName));
                 return;
             }
@@ -265,7 +265,7 @@ namespace BWYouCore.Web.MVC.Extensions
         {
             if (source == null)
             {
-                logger.Info(string.Format("MapFromBindingModelToBaseModel Source is null : type={0}",
+                logger.Debug(string.Format("MapFromBindingModelToBaseModel Source is null : type={0}",
                                                 typeof(TSource).FullName));
                 return;
             }

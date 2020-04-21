@@ -108,7 +108,7 @@ namespace BWYouCore.Web.MVC.DAOs
         {
             if (this.DbContext.Entry(entity).State != EntityState.Detached)
             {
-                logger.Info(string.Format("Manually Updating the Entity Managed(Skip)  : type={0}, id={1}", entity.GetType().FullName, entity.Id));
+                logger.Debug(string.Format("Manually Updating the Entity Managed(Skip)  : type={0}, id={1}", entity.GetType().FullName, entity.Id));
                 return;
             }
 
@@ -128,7 +128,7 @@ namespace BWYouCore.Web.MVC.DAOs
         {
             if (this.DbContext.Entry(entity).State != EntityState.Detached)
             {
-                logger.Info(string.Format("Manually Updating the Entity Managed(Skip) : type={0}, id={1}", entity.GetType().FullName, entity.Id));
+                logger.Debug(string.Format("Manually Updating the Entity Managed(Skip) : type={0}, id={1}", entity.GetType().FullName, entity.Id));
                 return;
             }
 
@@ -152,7 +152,7 @@ namespace BWYouCore.Web.MVC.DAOs
         {
             if (this.DbContext.Entry(entity).State != EntityState.Detached)
             {
-                logger.Info(string.Format("Manually Updating the Entity Managed(Skip) : type={0}, id={1}", entity.GetType().FullName, entity.Id));
+                logger.Debug(string.Format("Manually Updating the Entity Managed(Skip) : type={0}, id={1}", entity.GetType().FullName, entity.Id));
                 return;
             }
 
@@ -204,7 +204,7 @@ namespace BWYouCore.Web.MVC.DAOs
         /// <returns></returns>
         public TEntity Clone(TEntity source)
         {
-            logger.Info(string.Format("Clone Entity : type={0}, id={1}", source.GetType().FullName, source.Id));
+            logger.Debug(string.Format("Clone Entity : type={0}, id={1}", source.GetType().FullName, source.Id));
             var clone = source.Clone(new Dictionary<object, object>(), false, true, CascadeRelationAttribute.CascadeDirection.Down, true);
             this.DbContext.Entry(source).State = EntityState.Detached;
             this.DbSet.Add(clone);
