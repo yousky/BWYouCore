@@ -55,7 +55,7 @@ namespace BWYouCore.Cloud.Storage
         /// <param name="overwrite"></param>
         /// <param name="useSequencedName"></param>
         /// <returns></returns>
-        public async Task<string> UploadAsync(Stream inputStream, string sourcefilename, string containerName, string destpath = "", bool useUUIDName = true, bool overwrite = false, bool useSequencedName = true)
+        public async Task<UploadedInfo> UploadAsync(Stream inputStream, string sourcefilename, string containerName, string destpath = "", bool useUUIDName = true, bool overwrite = false, bool useSequencedName = true)
         {
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
@@ -71,8 +71,9 @@ namespace BWYouCore.Cloud.Storage
             string mimeType = MimeTypesMap.GetMimeType(sourcefilename);
             blockBlob.Properties.ContentType = mimeType;
             await blockBlob.SetPropertiesAsync();
+            await blockBlob.FetchAttributesAsync();
 
-            return blockBlob.StorageUri.PrimaryUri.AbsoluteUri;
+            return new UploadedInfo { AbsoluteUri = blockBlob.StorageUri.PrimaryUri.AbsoluteUri, Length = blockBlob.Properties.Length };
         }
 
         /// <summary>
@@ -85,7 +86,7 @@ namespace BWYouCore.Cloud.Storage
         /// <param name="overwrite"></param>
         /// <param name="useSequencedName"></param>
         /// <returns></returns>
-        public async Task<string> UploadAsync(string sourcefilepathname, string containerName, string destpath = "", bool useUUIDName = true, bool overwrite = false, bool useSequencedName = true)
+        public async Task<UploadedInfo> UploadAsync(string sourcefilepathname, string containerName, string destpath = "", bool useUUIDName = true, bool overwrite = false, bool useSequencedName = true)
         {
             FileInfo fileInfo = new FileInfo(sourcefilepathname);
 
@@ -93,8 +94,8 @@ namespace BWYouCore.Cloud.Storage
             try
             {
                 fileStream = fileInfo.OpenRead();
-                var uri = await UploadAsync(fileStream, fileInfo.Name, containerName, destpath, useUUIDName, overwrite, useSequencedName);
-                return uri;
+                var uploadedInfo = await UploadAsync(fileStream, fileInfo.Name, containerName, destpath, useUUIDName, overwrite, useSequencedName);
+                return uploadedInfo;
             }
             finally
             {

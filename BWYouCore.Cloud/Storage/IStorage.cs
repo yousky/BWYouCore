@@ -22,7 +22,7 @@ namespace BWYouCore.Cloud.Storage
         /// <param name="overwrite">overwrite true, false</param>
         /// <param name="useSequencedName">overwrite false and same file exist then filename[1], filename[2], ... use</param>
         /// <returns>Saved File's Storage Uri</returns>
-        Task<string> UploadAsync(Stream inputStream, string sourcefilename, string containerName, string destpath = "", bool useUUIDName = true, bool overwrite = false, bool useSequencedName = true);
+        Task<UploadedInfo> UploadAsync(Stream inputStream, string sourcefilename, string containerName, string destpath = "", bool useUUIDName = true, bool overwrite = false, bool useSequencedName = true);
 
         /// <summary>
         /// Upload To Storage
@@ -34,7 +34,7 @@ namespace BWYouCore.Cloud.Storage
         /// <param name="overwrite">overwrite true, false</param>
         /// <param name="useSequencedName">overwrite false and same file exist then filename[1], filename[2], ... use</param>
         /// <returns>Saved File's Storage Uri</returns>
-        Task<string> UploadAsync(string sourcefilepathname, string containerName, string destpath = "", bool useUUIDName = true, bool overwrite = false, bool useSequencedName = true);
+        Task<UploadedInfo> UploadAsync(string sourcefilepathname, string containerName, string destpath = "", bool useUUIDName = true, bool overwrite = false, bool useSequencedName = true);
 
         /// <summary>
         /// Download To File
@@ -57,5 +57,11 @@ namespace BWYouCore.Cloud.Storage
         /// </summary>
         /// <param name="sourceUri">Source URI</param>
         Task DeleteAsync(Uri sourceUri);
+    }
+
+    public class UploadedInfo
+    {
+        public string AbsoluteUri { get; set; }
+        public long Length { get; set; }
     }
 }

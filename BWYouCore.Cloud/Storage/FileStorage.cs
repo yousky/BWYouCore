@@ -39,7 +39,7 @@ namespace BWYouCore.Cloud.Storage
         /// <param name="overwrite"></param>
         /// <param name="useSequencedName"></param>
         /// <returns></returns>
-        public async Task<string> UploadAsync(System.IO.Stream inputStream, string sourcefilename, string containerName, string destpath = "", bool useUUIDName = true, bool overwrite = false, bool useSequencedName = true)
+        public async Task<UploadedInfo> UploadAsync(System.IO.Stream inputStream, string sourcefilename, string containerName, string destpath = "", bool useUUIDName = true, bool overwrite = false, bool useSequencedName = true)
         {
             do
             {
@@ -48,14 +48,16 @@ namespace BWYouCore.Cloud.Storage
                     string relativeFilePath = GetDestFilePath(sourcefilename, containerName, destpath, useUUIDName, overwrite, useSequencedName);
                     InitDirectory(Path.Combine(RootPath, relativeFilePath));
 
-                    using (var fileStream = File.Create(Path.Combine(RootPath, relativeFilePath)))
+                    string fileFullPath = Path.Combine(RootPath, relativeFilePath);
+                    using (var fileStream = File.Create(fileFullPath))
                     {
                         inputStream.Seek(0, SeekOrigin.Begin);
                         await inputStream.CopyToAsync(fileStream);
                     }
+                    var fileInfo = new FileInfo(fileFullPath);
 
                     Uri url = new Uri(PublicRootUrl + "/" + relativeFilePath);
-                    return url.AbsoluteUri;
+                    return new UploadedInfo { AbsoluteUri = url.AbsoluteUri, Length = fileInfo.Length };
                 }
                 catch (Exception ex)
                 {
@@ -90,7 +92,7 @@ namespace BWYouCore.Cloud.Storage
         /// <param name="overwrite"></param>
         /// <param name="useSequencedName"></param>
         /// <returns></returns>
-        public Task<string> UploadAsync(string sourcefilepathname, string containerName, string destpath = "", bool useUUIDName = true, bool overwrite = false, bool useSequencedName = true)
+        public Task<UploadedInfo> UploadAsync(string sourcefilepathname, string containerName, string destpath = "", bool useUUIDName = true, bool overwrite = false, bool useSequencedName = true)
         {
             FileInfo fileInfo = new FileInfo(sourcefilepathname);
 

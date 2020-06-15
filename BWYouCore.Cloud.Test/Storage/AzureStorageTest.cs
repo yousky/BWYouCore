@@ -20,6 +20,9 @@ namespace BWYouCore.Cloud.Test.Storage
             string container = @"test";
             string destpath = @"Dest";
             string srcpathname = Path.Combine(Path.GetDirectoryName(typeof(FileStorageTest).Assembly.Location), @"Storage\Sample\Dest\test.js");
+
+            FileInfo fi = new FileInfo(srcpathname);
+
             IStorage storage = new AzureStorage(connectionString);
 
             // 동작
@@ -32,11 +35,12 @@ namespace BWYouCore.Cloud.Test.Storage
             {
                 ex = e;
             }
-            string uri = await storage.UploadAsync(srcpathname, container, destpath, true, false);
+            var uploadedInfo = await storage.UploadAsync(srcpathname, container, destpath, true, false);
 
             // 어설션
             Assert.IsInstanceOf(typeof(DuplicateFileException), ex);
-            Assert.IsTrue(uri.Contains(Path.Combine(container, destpath).Replace(@"\", @"/")));
+            Assert.IsTrue(uploadedInfo.AbsoluteUri.Contains(Path.Combine(container, destpath).Replace(@"\", @"/")));
+            Assert.AreEqual(fi.Length, uploadedInfo.Length);
         }
     }
 }

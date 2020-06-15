@@ -64,7 +64,7 @@ namespace BWYouCore.Cloud.Storage
         /// <param name="overwrite"></param>
         /// <param name="useSequencedName"></param>
         /// <returns></returns>
-        public async Task<string> UploadAsync(Stream inputStream, string sourcefilename, string containerName, string destpath = "", bool useUUIDName = true, bool overwrite = false, bool useSequencedName = true)
+        public async Task<UploadedInfo> UploadAsync(Stream inputStream, string sourcefilename, string containerName, string destpath = "", bool useUUIDName = true, bool overwrite = false, bool useSequencedName = true)
         {
             bool forceRequestAuth = false;
 
@@ -83,9 +83,9 @@ namespace BWYouCore.Cloud.Storage
                 {
                     Uri url = await GetDestFileUrlAsync(sourcefilename, containerName, destpath, useUUIDName, overwrite, useSequencedName, authToken);
 
-                    await UploadFromStreamAsync(inputStream, url, authToken);
+                    var uploadedInfo = await UploadFromStreamAsync(inputStream, url, authToken);
 
-                    return url.AbsoluteUri;
+                    return uploadedInfo;
                 }
                 catch (HttpWebResponseUnauthorizedException)
                 {
@@ -102,7 +102,7 @@ namespace BWYouCore.Cloud.Storage
 
         }
 
-        private async Task UploadFromStreamAsync(Stream inputStream, Uri url, string authToken)
+        private async Task<UploadedInfo> UploadFromStreamAsync(Stream inputStream, Uri url, string authToken)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "PUT";
@@ -119,7 +119,7 @@ namespace BWYouCore.Cloud.Storage
             {
                 if (response.StatusCode == HttpStatusCode.Created)
                 {
-                    return;
+                    return new UploadedInfo { AbsoluteUri = url.AbsoluteUri, Length = inputStream.Length };
                 }
                 else if (response.StatusCode == HttpStatusCode.Unauthorized)
                 {
@@ -142,7 +142,7 @@ namespace BWYouCore.Cloud.Storage
         /// <param name="overwrite"></param>
         /// <param name="useSequencedName"></param>
         /// <returns></returns>
-        public Task<string> UploadAsync(string sourcefilepathname, string containerName, string destpath = "", bool useUUIDName = true, bool overwrite = false, bool useSequencedName = true)
+        public Task<UploadedInfo> UploadAsync(string sourcefilepathname, string containerName, string destpath = "", bool useUUIDName = true, bool overwrite = false, bool useSequencedName = true)
         {
             FileInfo fileInfo = new FileInfo(sourcefilepathname);
 
