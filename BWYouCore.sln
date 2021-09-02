@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2042
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BWYouCore", "BWYouCore\BWYouCore.csproj", "{7BFD2A5B-882C-49FB-962F-58C377734AC9}"
 EndProject
@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BWYouCore.Crypt", "BWYouCor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BWYouCore.Compress", "BWYouCore.Compress\BWYouCore.Compress.csproj", "{20023D30-AE92-4C14-9B7A-5C8D04AACEB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BWYouCore.Cloud.Test", "BWYouCore.Cloud.Test\BWYouCore.Cloud.Test.csproj", "{2721FA4D-4249-4C18-8420-0791635F7F66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BWYouCore.Cloud.Test", "BWYouCore.Cloud.Test\BWYouCore.Cloud.Test.csproj", "{2721FA4D-4249-4C18-8420-0791635F7F66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

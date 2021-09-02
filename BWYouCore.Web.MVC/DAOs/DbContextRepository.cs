@@ -61,7 +61,7 @@ namespace BWYouCore.Web.MVC.DAOs
         /// </summary>
         /// <param name="keyValues"></param>
         /// <returns></returns>
-        public Task<TEntity> FindAsync(params object[] keyValues)
+        public ValueTask<TEntity> FindAsync(params object[] keyValues)
         {
             return this.DbSet.FindAsync(keyValues);
         }

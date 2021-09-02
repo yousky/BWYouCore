@@ -38,7 +38,7 @@ namespace BWYouCore.Web.MVC.DAOs
         /// </summary>
         /// <param name="keyValues"></param>
         /// <returns></returns>
-        Task<TEntity> FindAsync(params object[] keyValues);
+        ValueTask<TEntity> FindAsync(params object[] keyValues);
         /// <summary>
         /// Expose query objects
         /// </summary>
